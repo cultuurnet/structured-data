@@ -1,0 +1,25 @@
+{
+  "name": "publiq/structured-data",
+  "description": "This plugin provides structured data for events so Google can index them properly.",
+  "version": "1.0.0",
+  "type": "craft-plugin",
+  "minimum-stability": "dev",
+  "require": {
+    "craftcms/cms": "^3.0.0-beta.20",
+    "cultuurnet/search-v3": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "publiq\\structuredData\\": "src/"
+    }
+  },
+  "support": {
+    "email": "stijn@publiq.be"
+  },
+  "extra": {
+    "handle": "structured-data",
+    "name": "Publiq Structured Data",
+    "developer": "Stijn Swaanen",
+    "developerUrl": "https://github.com/stijnswaanen"
+  }
+}

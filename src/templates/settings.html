@@ -1,0 +1,15 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+    options: ["--Choose--", "https://search-test.uitdatabank.be", "https://search.uitdatabank.be"],
+    label: "Api location",
+    name: "apiLocation",
+    value: settings.apiLocation
+}) }}
+
+{{ forms.textField({
+    first: true,
+    label: "Api key",
+    name: 'apiKey',
+    value: settings.apiKey
+}) }}
