@@ -8,6 +8,8 @@ class StructuredDataVariable
 {
     public function getOfferData()
     {
-        return Plugin::getInstance()->searchApi->getOfferFromApi();
+        if (isset($_GET["cdbid"])) {
+            return Plugin::getInstance()->searchApi->getOfferFromApi($_GET["cdbid"]);
+        }
     }
 }

@@ -7,6 +7,7 @@ use publiq\structuredData\variables\StructuredDataVariable;
 
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -18,6 +19,9 @@ class Plugin extends \craft\base\Plugin
     {
         parent::init();
         self::$plugin = $this;
+
+        $annotation = new AnnotationRegistry();
+        $annotation->registerLoader('class_exists');
 
         $this->set('searchApi', '\publiq\structuredData\services\SearchApiService');
 

@@ -6,15 +6,16 @@ use craft\base\Component;
 use publiq\structuredData\Plugin;
 use GuzzleHttp\Client;
 
-use Cultuurnet\Searchv3\SearchQuery;
-use Cultuurnet\SearchV3\Parameter\Query;
+use CultuurNet\SearchV3\SearchQuery;
+use CultuurNet\SearchV3\Parameter\Query;
+use CultuurNet\SearchV3\Parameter\ApiKey;
 use CultuurNet\SearchV3\SearchClient;
 use CultuurNet\SearchV3\Serializer\Serializer;
 
 class SearchApiService extends Component
 {
 
-    public function getOfferFromApi()
+    public function getOfferFromApi($eventId)
     {
         $settings = Plugin::getInstance()->getSettings();
 
@@ -27,7 +28,7 @@ class SearchApiService extends Component
 
         $client = new Client([
             'base_uri' => $settings->apiLocation,
-            'timeout' => 1
+            'timeout' => 3
         ]);
 
         if ($settings->apiKey === '') {
@@ -37,33 +38,29 @@ class SearchApiService extends Component
             ];
         }
 
-        $eventId = $_GET["cdbid"];
-
-        if ($eventId === null || $eventId === '') {
-            return;
-        }
-
         // create a new search query
         $query = new SearchQuery(true);
+        $query->addParameter(new ApiKey($settings->apiKey));
         $query->addParameter(new Query($eventId));
 
         // Fire the searchQuery
         $searchClient = new SearchClient($client, new Serializer());
 
         try {
-            $return = $searchClient->searchEvents($query);
-            $collection = $return->getMember()->getItems();
+            $result = $searchClient->searchOffers($query);
+            $items = $result->getMember()->getItems();
 
             return [
                 'success' => true,
-                'event' => $collection
+                'event' => $items
             ];
 
         } catch (\Exception $e) {
-            $msg = json_decode($e->getMessage());
+            $msg = $e->getMessage();
+
             return [
                 'success' => false,
-                'message' => $msg->detail
+                'message' => $msg
             ];
         }
 
