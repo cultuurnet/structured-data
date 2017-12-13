@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 
 use CultuurNet\SearchV3\SearchQuery;
 use CultuurNet\SearchV3\Parameter\Query;
-use CultuurNet\SearchV3\Parameter\ApiKey;
 use CultuurNet\SearchV3\SearchClient;
 use CultuurNet\SearchV3\Serializer\Serializer;
 
@@ -26,10 +25,6 @@ class SearchApiService extends Component
             ];
         }
 
-        $client = new Client([
-            'base_uri' => $settings->apiLocation,
-            'timeout' => 3
-        ]);
 
         if ($settings->apiKey === '') {
             return [
@@ -38,9 +33,16 @@ class SearchApiService extends Component
             ];
         }
 
+        $client = new Client([
+            'base_uri' => $settings->apiLocation,
+            'timeout' => 3,
+            'headers' => [
+                'X-Api-Key' => $settings->apiKey
+            ]
+        ]);
+
         // create a new search query
         $query = new SearchQuery(true);
-        $query->addParameter(new ApiKey($settings->apiKey));
         $query->addParameter(new Query($eventId));
 
         // Fire the searchQuery
