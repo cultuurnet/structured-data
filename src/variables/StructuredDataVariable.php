@@ -6,10 +6,17 @@ use publiq\structuredData\Plugin;
 
 class StructuredDataVariable
 {
+    public function getOffers()
+    {
+        return Plugin::getInstance()->searchApi->getOffersFromApi();
+    }
+
     public function getOfferData()
     {
-        if (isset($_GET["cdbid"])) {
-            return Plugin::getInstance()->searchApi->getOfferFromApi($_GET["cdbid"]);
+        $cdbid = substr($_GET['p'], -36);
+
+        if (isset($cdbid)) {
+            return Plugin::getInstance()->searchApi->getOfferFromApi($cdbid);
         }
     }
 }

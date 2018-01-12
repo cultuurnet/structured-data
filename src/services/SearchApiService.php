@@ -7,14 +7,15 @@ use publiq\structuredData\Plugin;
 use GuzzleHttp\Client;
 
 use CultuurNet\SearchV3\SearchQuery;
-use CultuurNet\SearchV3\Parameter\Query;
+use CultuurNet\SearchV3\Parameter\Id;
 use CultuurNet\SearchV3\SearchClient;
 use CultuurNet\SearchV3\Serializer\Serializer;
 
 class SearchApiService extends Component
 {
+    protected $client;
 
-    public function getOfferFromApi($eventId)
+    protected function getClient()
     {
         $settings = Plugin::getInstance()->getSettings();
 
@@ -33,20 +34,20 @@ class SearchApiService extends Component
             ];
         }
 
-        $client = new Client([
+        $this->client = new Client([
+            //'base_uri' => 'https://search-acc.uitdatabank.be/',
             'base_uri' => $settings->apiLocation,
-            'timeout' => 3,
+            'timeout' => 5,
             'headers' => [
                 'X-Api-Key' => $settings->apiKey
             ]
         ]);
+    }
 
-        // create a new search query
-        $query = new SearchQuery(true);
-        $query->addParameter(new Query($eventId));
-
+    protected function executeQuery($query)
+    {
         // Fire the searchQuery
-        $searchClient = new SearchClient($client, new Serializer());
+        $searchClient = new SearchClient($this->client, new Serializer());
 
         try {
             $result = $searchClient->searchOffers($query);
@@ -54,7 +55,7 @@ class SearchApiService extends Component
 
             return [
                 'success' => true,
-                'event' => $items
+                'items' => $items
             ];
 
         } catch (\Exception $e) {
@@ -65,6 +66,24 @@ class SearchApiService extends Component
                 'message' => $msg
             ];
         }
+    }
 
+    public function getOffersFromApi()
+    {
+        $this->getClient();
+        $query = new SearchQuery(true);
+
+        return $this->executeQuery($query);
+    }
+
+    public function getOfferFromApi($eventId)
+    {
+        $this->getClient();
+
+        // create a new search query
+        $query = new SearchQuery(true);
+        $query->addParameter(new Id($eventId));
+
+        return $this->executeQuery($query);
     }
 }
