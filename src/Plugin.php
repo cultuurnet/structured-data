@@ -4,7 +4,9 @@ namespace publiq\structuredData;
 
 use publiq\structuredData\models\Settings;
 use publiq\structuredData\variables\StructuredDataVariable;
+use publiq\structuredData\twigextensions\PubliqFormatterTwigExtension;
 
+use Craft;
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -19,6 +21,8 @@ class Plugin extends \craft\base\Plugin
     {
         parent::init();
         self::$plugin = $this;
+
+        Craft::$app->view->registerTwigExtension(new PubliqFormatterTwigExtension());
 
         $annotation = new AnnotationRegistry();
         $annotation->registerLoader('class_exists');

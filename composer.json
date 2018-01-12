@@ -6,7 +6,8 @@
   "minimum-stability": "dev",
   "require": {
     "craftcms/cms": "^3.0.0-beta.20",
-    "cultuurnet/search-v3": "dev-master"
+    "cultuurnet/search-v3": "dev-master",
+    "cultuurnet/calendar-summary-v3": "dev-master"
   },
   "autoload": {
     "psr-4": {
