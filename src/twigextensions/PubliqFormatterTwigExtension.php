@@ -60,7 +60,7 @@ class PubliqFormatterTwigExtension extends \Twig_Extension
             if (isset($labelsToCheck[strtolower($label)])) {
                 $iconArray[] = [
                     'name' => ucfirst($label),
-                    'icon' => $labelsToCheck[$label]
+                    'icon' => $labelsToCheck[strtolower($label)]
                 ];
             }
         }
