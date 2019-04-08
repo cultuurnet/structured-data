@@ -5,7 +5,7 @@
   "type": "craft-plugin",
   "minimum-stability": "dev",
   "require": {
-    "craftcms/cms": "3.0.0-RC13",
+    "craftcms/cms": "^3",
     "cultuurnet/search-v3": "dev-master",
     "cultuurnet/calendar-summary-v3": "dev-master"
   },
