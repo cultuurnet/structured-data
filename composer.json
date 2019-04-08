@@ -7,7 +7,7 @@
   "require": {
     "craftcms/cms": "3.0.0-RC13",
     "cultuurnet/search-v3": "dev-master",
-    "cultuurnet/calendar-summary-v3": "feature/mkok-branch"
+    "cultuurnet/calendar-summary-v3": "dev-master"
   },
   "autoload": {
     "psr-4": {
