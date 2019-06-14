@@ -15,12 +15,12 @@
     }
   },
   "support": {
-    "email": "stijn@publiq.be"
+    "email": "sven@publiq.be"
   },
   "extra": {
     "handle": "structured-data",
     "name": "Publiq Structured Data",
-    "developer": "Stijn Swaanen",
-    "developerUrl": "https://github.com/stijnswaanen"
+    "developer": "Sven Houtmeyers",
+    "developerUrl": "https://github.com/svenhoutmeyers"
   }
 }
