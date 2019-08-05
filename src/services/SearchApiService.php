@@ -3,6 +3,8 @@
 namespace publiq\structuredData\services;
 
 use craft\base\Component;
+use CultuurNet\SearchV3\Parameter\AvailableFrom;
+use CultuurNet\SearchV3\Parameter\AvailableTo;
 use publiq\structuredData\Plugin;
 use GuzzleHttp\Client;
 
@@ -76,12 +78,18 @@ class SearchApiService extends Component
         return $this->executeQuery($query);
     }
 
-    public function getOfferFromApi($eventId)
+    public function getOfferFromApi($eventId, $includePastEvents)
     {
         $this->getClient();
 
         // create a new search query
         $query = new SearchQuery(true);
+        
+        if($includePastEvents) {
+            $query->addParameter(new AvailableFrom('*'));
+            $query->addParameter(new AvailableTo('*'));   
+        }
+
         $query->addParameter(new Id($eventId));
 
         return $this->executeQuery($query);

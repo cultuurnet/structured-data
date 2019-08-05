@@ -1,7 +1,7 @@
 {
   "name": "publiq/structured-data",
   "description": "This plugin provides structured data for events so Google can index them properly.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "craft-plugin",
   "minimum-stability": "dev",
   "require": {
