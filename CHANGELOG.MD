@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## 1.2.0 - 2019-09-09
+
+### Added
+- API results for detail pages are now cached for 24 hours (caching is enable for any environment that is not `DEV`)
+- This cache can be cleared for the CP's Clear cache utility (1 cache for all event detail data)
+
 ## 1.1.0 - 2019-08-05
 
 ### Added
